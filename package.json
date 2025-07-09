@@ -1,7 +1,7 @@
 {
   "name": "kiselnaya-menu",
   "version": "0.1.0",
-  "homepage": "https://github.com/scrashm/kiselnaya",
+  "homepage": "https://scrashm.github.io/kisel",
   "private": true,
   "dependencies": {
     "cra-template-pwa": "2.0.0",
