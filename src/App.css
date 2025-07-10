@@ -41,21 +41,37 @@ html {
     align-items: center;
     justify-content: space-between;
     padding: 6px 24px 6px 24px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.95) 0%, #e3e6db 60%, rgba(255,255,255,0) 100%);
+    background: rgba(243, 236, 222, 0.92);
     backdrop-filter: blur(8px);
-    box-shadow: 0 2px 12px rgba(184,123,75,0.08);
+    box-shadow: none;
     position: sticky;
     top: 0;
     z-index: 10;
-    border-bottom: 2px solid #e2c9a0;
+    border-bottom: none;
   }
+
+.navbar::after {
+  /* Удалено по просьбе пользователя */
+}
 
   .logo-img {
     height: 60px;
     width: 60px;
     border-radius: 14px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    opacity: 0;
+    transform: scale(0.8);
+    animation: logoFadeIn 0.9s cubic-bezier(.23,1.02,.32,1) forwards;
+    transition: transform 0.25s cubic-bezier(.23,1.02,.32,1);
   }
+.logo-img:hover, .logo-img:focus {
+  transform: scale(1.08) rotate(-7deg);
+  box-shadow: 0 4px 18px rgba(184,123,75,0.18);
+}
+@keyframes logoFadeIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
 
   .nav-links {
     list-style: none;
@@ -84,6 +100,17 @@ html {
   .nav-links a:hover, .nav-links a:focus, .nav-links a:active, .nav-links a:focus-visible {
     color: #fffbe7;
     background: #b87b4b;
+    transform: scale(1.06);
+    box-shadow: 0 2px 8px rgba(184,123,75,0.13);
+  }
+  .nav-links a:active {
+    transform: scale(0.97);
+  }
+  .nav-links a[disabled], .nav-links a.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    background: #e3e6db;
+    color: #b87b4b;
   }
 
   .map-btn {
@@ -105,6 +132,17 @@ html {
   .map-btn:hover, .map-btn:focus {
     background: #e63946;
     color: #fffbe7;
+    transform: scale(1.04);
+    box-shadow: 0 2px 12px rgba(230,57,70,0.13);
+  }
+  .map-btn:active {
+    transform: scale(0.97);
+  }
+  .map-btn[disabled], .map-btn.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    background: #e3e6db;
+    color: #b87b4b;
   }
 
   .App-header { /*Логотип+название+надпись */
@@ -129,7 +167,8 @@ html {
   }
 
   .App-header p { /*Откройте для себя традиционные вкусы и авторские рецепты в уютной атмосфере!*/
-    color: #bfbc1b;
+    color: #bfa800;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.10);
     font-size: 1.50rem;
     margin-top: 180px; /* или другое значение, чтобы текст был под логотипом */
     margin-bottom: 10px;
@@ -196,11 +235,13 @@ html {
     margin: 0;
     overflow: hidden;
     border: 2px solid #e2c9a0;
-    transition: box-shadow 0.2s, border 0.2s;
+    transition: box-shadow 0.2s, border 0.2s, transform 0.18s cubic-bezier(.23,1.02,.32,1);
   }
-  .menu-item:hover {
-    box-shadow: 0 8px 32px rgba(184,123,75,0.10);
+  .menu-item:hover, .menu-item:focus-within {
+    transform: scale(1.035);
+    box-shadow: 0 8px 32px rgba(184,123,75,0.13);
     border: 2px solid #b87b4b;
+    z-index: 2;
   }
 
   .menu-img {
@@ -224,7 +265,7 @@ html {
     font-size: 1.13rem;
   }
   .item-desc {
-    color: #7c6f5a;
+    color: #5a4c3a;
     margin: 0 8px;
     font-style: italic;
     font-size: 1.01rem;
@@ -574,8 +615,13 @@ html {
   min-width: 220px;
   max-width: 320px;
   flex: 0 0 260px;
+  transition: box-shadow 0.2s, transform 0.2s;
 }
-
+.review-column:hover, .review-column:focus-within {
+  box-shadow: 0 8px 32px rgba(184,123,75,0.13);
+  transform: scale(1.03);
+  z-index: 2;
+}
 .review-text {
   font-size: 1.08rem;
   color: #7c6f5a;
@@ -589,6 +635,11 @@ html {
   font-size: 1.35rem;
   margin-bottom: 8px;
   letter-spacing: 2px;
+  animation: starsFadeIn 1s cubic-bezier(.23,1.02,.32,1);
+}
+@keyframes starsFadeIn {
+  from { opacity: 0; transform: scale(0.7); }
+  to { opacity: 1; transform: none; }
 }
 
 .review-user {
@@ -876,8 +927,19 @@ html {
   backdrop-filter: blur(2px);
 }
 .scroll-top-btn:hover, .scroll-top-btn:focus {
-  opacity: 1;
-  box-shadow: 0 4px 24px rgba(184,123,75,0.18);
+  background: #b87b4b;
+  color: #fffbe7;
+  transform: scale(1.08);
+  box-shadow: 0 2px 12px rgba(184,123,75,0.13);
+}
+.scroll-top-btn:active {
+  transform: scale(0.95);
+}
+.scroll-top-btn[disabled], .scroll-top-btn.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  background: #e3e6db;
+  color: #b87b4b;
 }
 @media (max-width: 600px) {
   .scroll-top-btn {
@@ -973,6 +1035,32 @@ html {
   animation: fadeInUp 0.7s cubic-bezier(.23,1.02,.32,1) forwards;
 }
 @keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Slide-in слева */
+.slide-in-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  animation: slideInLeft 0.8s cubic-bezier(.23,1.02,.32,1) forwards;
+}
+@keyframes slideInLeft {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Scale-in */
+.scale-in {
+  opacity: 0;
+  transform: scale(0.96);
+  animation: scaleIn 0.7s cubic-bezier(.23,1.02,.32,1) forwards;
+}
+@keyframes scaleIn {
   to {
     opacity: 1;
     transform: none;
@@ -1088,5 +1176,46 @@ html {
     border-radius: 6px;
     width: 100%;
     margin-top: 6px;
+  }
+}
+
+@media (max-width: 600px) {
+  .reviews-grid {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+  .review-column {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+#about {
+  padding-top: 60px;
+  margin-top: -40px;
+}
+
+.slide-in-right {
+  opacity: 0;
+  transform: translateX(40px);
+  animation: slideInRight 0.8s cubic-bezier(.23,1.02,.32,1) forwards;
+}
+@keyframes slideInRight {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.fade-in-down {
+  opacity: 0;
+  transform: translateY(-30px);
+  animation: fadeInDown 0.7s cubic-bezier(.23,1.02,.32,1) forwards;
+}
+@keyframes fadeInDown {
+  to {
+    opacity: 1;
+    transform: none;
   }
 }
