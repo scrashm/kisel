@@ -17,9 +17,9 @@ const menu = [
     items: [
       { name: "Маракуйя-мята", description: "Экзотика и свежесть в одном стакане.", price: "180₽" },
       { name: "Имбирно-апельсиновый", description: "Бодрящий.", price: "180₽" },
-      { name: "Кисель без сахара", description: "Для сторонников здорового образа жизни.", price: "160₽", image: "/кисель без сахара.png" },
-      { name: "Лавандово-лимонный", description: "Утонченный аромат и нежная кислинка.", price: "190₽", image: "/лавандово-лимонный.png" },
-      { name: "Роза-малина", description: "Изысканный букет с легкой терпкостью.", price: "190₽", image: "/роза-малина.png" },
+      { name: "Кисель без сахара", description: "Для сторонников здорового образа жизни.", price: "160₽", image: "Кисель без сахара.png" },
+      { name: "Лавандово-лимонный", description: "Утонченный аромат и нежная кислинка.", price: "190₽", image: "Лавандово-лимонный.png" },
+      { name: "Роза-малина", description: "Изысканный букет с легкой терпкостью.", price: "190₽", image: "Роза-малина.png" },
     ]
   },
   {
@@ -45,7 +45,7 @@ function App() {
   return (
     <div className="App">
       <nav className="navbar">
-        <img src="/logo.jpeg" alt="Логотип" className="logo-img" />
+        <img src={process.env.PUBLIC_URL + '/logo.jpeg'} alt="Логотип" className="logo-img" />
         <ul className="nav-links">
           {navLinks.map((link) => (
             <li key={link.label}>
@@ -104,12 +104,12 @@ function App() {
                 {section.items.slice(0, 3).map(item => (
                   <li key={item.name} className="menu-item classic-menu-item">
                     <img
-                      src={`/${item.name}.jpg`}
+                      src={process.env.PUBLIC_URL + '/' + item.name + '.jpg'}
                       alt={item.name}
                       className="menu-img"
                       onError={e => {
                         e.target.onerror = null;
-                        e.target.src = `/${item.name}.jpeg`;
+                        e.target.src = process.env.PUBLIC_URL + '/' + item.name + '.jpeg';
                       }}
                     />
                     <div>
@@ -123,12 +123,12 @@ function App() {
                 {section.items.slice(3).map(item => (
                   <li key={item.name} className="menu-item classic-menu-item">
                     <img
-                      src={`/${item.name}.jpg`}
+                      src={process.env.PUBLIC_URL + '/' + item.name + '.jpg'}
                       alt={item.name}
                       className="menu-img"
                       onError={e => {
                         e.target.onerror = null;
-                        e.target.src = `/${item.name}.jpeg`;
+                        e.target.src = process.env.PUBLIC_URL + '/' + item.name + '.jpeg';
                       }}
                     />
                     <div>
@@ -150,12 +150,12 @@ function App() {
                 {section.items.map(item => (
                   <li key={item.name} className="menu-item author-menu-item">
                     <img
-                      src={item.image ? item.image : `/${item.name}.jpg`}
+                      src={item.image ? process.env.PUBLIC_URL + '/' + item.image : process.env.PUBLIC_URL + '/' + item.name + '.jpg'}
                       alt={item.name}
                       className="menu-img"
                       onError={e => {
                         e.target.onerror = null;
-                        e.target.src = item.image ? item.image : `/${item.name}.jpeg`;
+                        e.target.src = item.image ? process.env.PUBLIC_URL + '/' + item.image : process.env.PUBLIC_URL + '/' + item.name + '.jpeg';
                       }}
                     />
                     <div>
@@ -177,12 +177,12 @@ function App() {
                 {section.items.map(item => (
                   <li key={item.name} className={"menu-item" + (section.category === "Дополнения" ? " addition-menu-item" : "") }>
                     <img
-                      src={item.image ? item.image : `/${item.name}.jpg`}
+                      src={item.image ? process.env.PUBLIC_URL + '/' + item.image : process.env.PUBLIC_URL + '/' + item.name + '.jpg'}
                       alt={item.name}
                       className="menu-img"
                       onError={e => {
                         e.target.onerror = null;
-                        e.target.src = item.image ? item.image : `/${item.name}.jpeg`;
+                        e.target.src = item.image ? process.env.PUBLIC_URL + '/' + item.image : process.env.PUBLIC_URL + '/' + item.name + '.jpeg';
                       }}
                     />
                     <div>
@@ -207,25 +207,25 @@ function App() {
             <h3>Отзывы наших гостей</h3>
             <div className="reviews-grid">
               <div className="review-column">
-                <div className="review-avatar"><img src="/отзыв1.png" alt="Аватар Вадик" style={{width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover', transform: 'scale(1.2)'}} /></div>
+                <div className="review-avatar"><img src={process.env.PUBLIC_URL + '/отзыв1.png'} alt="Аватар Вадик" style={{width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover', transform: 'scale(1.2)'}} /></div>
                 <div className="review-text">"Спасибо папаша."</div>
                 <div className="review-stars">★★★★★</div>
                 <div className="review-user">Маргарин</div>
               </div>
               <div className="review-column">
-                <div className="review-avatar"><img src="/отзыв2.png" alt="Аватар Маргарин" style={{width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover', transform: 'scale(1.2)'}} /></div>
+                <div className="review-avatar"><img src={process.env.PUBLIC_URL + '/отзыв2.png'} alt="Аватар Маргарин" style={{width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover', transform: 'scale(1.2)'}} /></div>
                 <div className="review-text">"Кисельная моя любовь и в каждом окне<br/>Солдаты трущоб улыбаются мне"</div>
                 <div className="review-stars">★★★★★</div>
                 <div className="review-user">Вадик</div>
               </div>
               <div className="review-column">
-                <div className="review-avatar"><img src="/отзыв3.png" alt="Аватар Мария" style={{width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover', objectPosition: '60% 50%'}} /></div>
+                <div className="review-avatar"><img src={process.env.PUBLIC_URL + '/отзыв3.png'} alt="Аватар Мария" style={{width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover', objectPosition: '60% 50%'}} /></div>
                 <div className="review-text">"Кчау."</div>
                 <div className="review-stars">★★★★★</div>
                 <div className="review-user">Ондрей</div>
               </div>
               <div className="review-column">
-                <div className="review-avatar"><img src="/отзыв4.png" alt="Аватар Птица" style={{width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover'}} /></div>
+                <div className="review-avatar"><img src={process.env.PUBLIC_URL + '/отзыв4.png'} alt="Аватар Птица" style={{width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover'}} /></div>
                 <div className="review-text">"Синица,но без пива"</div>
                 <div className="review-stars">★★★★★</div>
                 <div className="review-user">Птица</div>
