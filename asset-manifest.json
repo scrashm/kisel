@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/kisel/static/css/main.2d3b07a4.css",
-    "main.js": "/kisel/static/js/main.f1e957bf.js",
+    "main.css": "/kisel/static/css/main.5c8c9208.css",
+    "main.js": "/kisel/static/js/main.ceedce7c.js",
     "static/js/488.16bd4262.chunk.js": "/kisel/static/js/488.16bd4262.chunk.js",
     "static/media/фон11.png": "/kisel/static/media/фон11.2217e9d30e5c8366b671.png",
     "static/media/logo4.png": "/kisel/static/media/logo4.8547eafcf4038b2a02f6.png",
     "static/media/logo2.png": "/kisel/static/media/logo2.601ec34a12963462e75d.png",
     "service-worker.js": "/kisel/service-worker.js",
     "index.html": "/kisel/index.html",
-    "main.2d3b07a4.css.map": "/kisel/static/css/main.2d3b07a4.css.map",
-    "main.f1e957bf.js.map": "/kisel/static/js/main.f1e957bf.js.map",
+    "main.5c8c9208.css.map": "/kisel/static/css/main.5c8c9208.css.map",
+    "main.ceedce7c.js.map": "/kisel/static/js/main.ceedce7c.js.map",
     "488.16bd4262.chunk.js.map": "/kisel/static/js/488.16bd4262.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2d3b07a4.css",
-    "static/js/main.f1e957bf.js"
+    "static/css/main.5c8c9208.css",
+    "static/js/main.ceedce7c.js"
   ]
 }
