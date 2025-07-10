@@ -1,12 +1,8 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Кисельная",
+  "name": "Кисельная — кафе традиционных и авторских киселей в Липецке",
+  "description": "Кафе 'Кисельная' — уютное место с традиционными и авторскими киселями, домашней выпечкой и атмосферой уюта. Попробуйте лучшие напитки и десерты!",
   "icons": [
-    {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
     {
       "src": "logo192.png",
       "type": "image/png",
@@ -20,6 +16,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#b87b4b",
+  "background_color": "#fffbe7"
 }

@@ -1,35 +1,35 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
 
 const menu = [
   {
     category: "Классические кисели",
     items: [
-      { name: "Вишнёвый кисель", description: "Яркий и насыщенный, как лето.", price: "150₽" },
-      { name: "Клюквенный кисель", description: "Традиционный вкус, любимый с детства.", price: "150₽" },
-      { name: "Молочный кисель", description: "Нежный и сливочный.", price: "140₽" },
-      { name: "Яблочный кисель", description: "Свежий и ароматный яблочный вкус.", price: "170₽" },
-      { name: "Черничный кисель", description: "Нежный и насыщенный черничный вкус.", price: "190₽" },
+      { name: "Вишнёвый кисель", description: "Яркий и насыщенный, как лето", price: "150₽" },
+      { name: "Клюквенный кисель", description: "Традиционный вкус, любимый с детства", price: "150₽" },
+      { name: "Молочный кисель", description: "Нежный и сливочный", price: "140₽" },
+      { name: "Яблочный кисель", description: "Свежий и ароматный яблочный вкус", price: "170₽" },
+      { name: "Черничный кисель", description: "Нежный и насыщенный черничный вкус", price: "190₽" },
     ],
   },
   {
     category: "Авторские кисели",
     items: [
-      { name: "Маракуйя-мята", description: "Экзотика и свежесть в одном стакане.", price: "180₽" },
-      { name: "Имбирно-апельсиновый", description: "Бодрящий.", price: "180₽" },
-      { name: "Кисель без сахара", description: "Для сторонников здорового образа жизни.", price: "160₽", image: "Кисель без сахара.png" },
-      { name: "Лавандово-лимонный", description: "Утонченный аромат и нежная кислинка.", price: "190₽", image: "Лавандово-лимонный.png" },
-      { name: "Роза-малина", description: "Изысканный букет с легкой терпкостью.", price: "190₽", image: "Роза-малина.png" },
+      { name: "Маракуйя-мята", description: "Экзотика и свежесть в одном стакане", price: "180₽" },
+      { name: "Имбирно-апельсиновый", description: "Бодрящий", price: "180₽" },
+      { name: "Кисель без сахара", description: "Для сторонников здорового образа жизни", price: "160₽", image: "кисель без сахара.png" },
+      { name: "Лавандово-лимонный", description: "Утонченный аромат и нежная кислинка", price: "190₽", image: "лавандово-лимонный.png" },
+      { name: "Роза-малина", description: "Изысканный букет с легкой терпкостью", price: "190₽", image: "роза-малина.png" },
     ]
   },
   {
     category: "Дополнения",
     items: [
-      { name: "Пирожки с начинками", description: "Свежая выпечка к вашему напитку.", price: "70₽" },
-      { name: "Круассаны", description: "Хрустящие и ароматные.", price: "90₽", image: "круассаны.png" },
-      { name: "Мороженое с киселём", description: "Освежающее лакомство.", price: "120₽" },
-      { name: "Травяной чай", description: "Ароматный и натуральный.", price: "100₽" },
-      { name: "Домашний компот", description: "Освежающий напиток.", price: "100₽" },
+      { name: "Пирожки с начинками", description: "Свежая выпечка к вашему напитку", price: "70₽" },
+      { name: "Круассаны", description: "Хрустящие и ароматные", price: "90₽", image: "круассаны.png" },
+      { name: "Мороженое с киселём", description: "Освежающее лакомство", price: "120₽" },
+      { name: "Травяной чай", description: "Ароматный и натуральный", price: "100₽" },
+      { name: "Домашний компот", description: "Освежающий напиток", price: "100₽" },
     ],
   },
 ];
@@ -39,16 +39,71 @@ const navLinks = [
   { label: "Меню", href: "#menu" },
   { label: "Мы", href: "#about" },
   { label: "Где мы", href: "#worktime" },
+  { label: "Контакты", href: "#contacts" },
 ];
 
+function useFadeInOnScroll() {
+  const ref = useRef();
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+    const handleScroll = () => {
+      const rect = node.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 60) {
+        node.classList.add('fade-in');
+        window.removeEventListener('scroll', handleScroll);
+      }
+    };
+    handleScroll();
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+  return ref;
+}
+
 function App() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  // refs для fade-in секций меню
+  const menuSectionRefs = useRef([]);
+  // ref для отзывов
+  const reviewsRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      menuSectionRefs.current.forEach(ref => {
+        if (ref) {
+          const rect = ref.getBoundingClientRect();
+          if (rect.top < window.innerHeight - 60) {
+            ref.classList.add('fade-in');
+          }
+        }
+      });
+      if (reviewsRef.current) {
+        const rect = reviewsRef.current.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 60) {
+          reviewsRef.current.classList.add('fade-in');
+        }
+      }
+    };
+    handleScroll();
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="App">
       <nav className="navbar">
         <img src={process.env.PUBLIC_URL + '/logo.jpeg'} alt="Логотип" className="logo-img" />
-        <ul className="nav-links">
+        <div className="burger" onClick={() => setMenuOpen(!menuOpen)}>
+          <span className={menuOpen ? "burger-line open" : "burger-line"}></span>
+          <span className={menuOpen ? "burger-line open" : "burger-line"}></span>
+          <span className={menuOpen ? "burger-line open" : "burger-line"}></span>
+        </div>
+        <ul className={menuOpen ? "nav-links nav-mobile open" : "nav-links"}>
           {navLinks.map((link) => (
-            <li key={link.label}>
+            <li key={link.label} onClick={() => setMenuOpen(false)}>
               {link.label === "Главная" ? (
                 <a href="#" onClick={e => { e.preventDefault(); window.scrollTo({top: 0, behavior: 'smooth'}); }}>Главная</a>
               ) : link.label === "О нас" ? (
@@ -60,6 +115,15 @@ function App() {
                     window.scrollTo({top: y, behavior: 'smooth'});
                   }
                 }}>О нас</a>
+              ) : link.label === "Контакты" ? (
+                <a href={link.href} onClick={e => {
+                  e.preventDefault();
+                  const contacts = document.getElementById('contacts');
+                  if (contacts) {
+                    const y = contacts.getBoundingClientRect().top + window.pageYOffset - 60;
+                    window.scrollTo({top: y, behavior: 'smooth'});
+                  }
+                }}>Контакты</a>
               ) : (
                 <a href={link.href}>{link.label}</a>
               )}
@@ -74,7 +138,10 @@ function App() {
           <div className="contact-item">
             <h4>Наш адрес</h4>
             <p>г. Липецк, ул. Кисельная, д. 14/88</p>
-            <div className="contact-subtext">В самом центре города, рядом с метро</div>
+            <div className="map-embed-block">
+              <iframe src="https://yandex.ru/map-widget/v1/?ll=39.593331%2C52.602269&z=17&pt=39.593331,52.602269,pm2rdm" width="100%" height="220" frameBorder="0" title="Карта Кисельная" style={{borderRadius: '14px', marginTop: '10px'}} allowFullScreen></iframe>
+            </div>
+            <a className="map-btn map-btn-small" href="https://yandex.ru/maps/?ll=39.593331%2C52.602269&z=17&pt=39.593331,52.602269,pm2rdm" target="_blank" rel="noopener noreferrer">Yandex maps</a>
           </div>
           <div className="contact-item" id="worktime">
             <h4>Часы работы</h4>
@@ -97,8 +164,8 @@ function App() {
         {/* Классические кисели */}
         {menu
           .filter(section => section.category === "Классические кисели")
-          .map(section => (
-            <div key={section.category} className="menu-section">
+          .map((section, idx) => (
+            <div key={section.category} className="menu-section" ref={el => menuSectionRefs.current[idx] = el}>
               <h3>{section.category}</h3>
               <ul className="classic-row">
                 {section.items.slice(0, 3).map(item => (
@@ -143,8 +210,8 @@ function App() {
         {/* Авторские кисели */}
         {menu
           .filter(section => section.category === "Авторские кисели")
-          .map(section => (
-            <div key={section.category} className="menu-section">
+          .map((section, idx) => (
+            <div key={section.category} className="menu-section" ref={el => menuSectionRefs.current[1 + idx] = el}>
               <h3>{section.category}</h3>
               <ul className="author-row">
                 {section.items.map(item => (
@@ -170,8 +237,8 @@ function App() {
         {/* Остальные разделы */}
         {menu
           .filter(section => section.category !== "Классические кисели" && section.category !== "Авторские кисели")
-          .map(section => (
-            <div key={section.category} className="menu-section">
+          .map((section, idx) => (
+            <div key={section.category} className="menu-section" ref={el => menuSectionRefs.current[2 + idx] = el}>
               <h3>{section.category}</h3>
               <ul className={section.category === "Дополнения" ? "additions-grid" : undefined}>
                 {section.items.map(item => (
@@ -205,7 +272,7 @@ function App() {
           </div>
           <div className="about-block about-reviews">
             <h3>Отзывы наших гостей</h3>
-            <div className="reviews-grid">
+            <div className="reviews-grid" ref={reviewsRef}>
               <div className="review-column">
                 <div className="review-avatar"><img src={process.env.PUBLIC_URL + '/отзыв1.png'} alt="Аватар Вадик" style={{width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover', transform: 'scale(1.2)'}} /></div>
                 <div className="review-text">"Спасибо папаша."</div>
@@ -238,6 +305,14 @@ function App() {
       <footer className="footer" id="contacts">
         <p>© Кафе "Кисельная", 2025</p>
       </footer>
+      {showScrollTop && (
+        <button className="scroll-top-btn" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} aria-label="Наверх">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="16" cy="16" r="16" fill="white" fillOpacity="0.6"/>
+            <path d="M10 18l6-6 6 6" stroke="#b87b4b" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </button>
+      )}
     </div>
   );
 }
